@@ -4,18 +4,29 @@ import { siteConfig, navLinks } from '../data/stores.ts';
 const { pathname } = Astro.url;
 ---
 
-<header class="header">
-  <div class="header-top">
-    <a href={siteConfig.phoneLink}>{siteConfig.phone}</a>
+<!-- Gold Top Promo Bar -->
+<div class="header-promo">
+  <div class="container">
+    <span>Festive season is around the corner! Shop the best deals at up to 85% off on Oberon Mall.</span>
   </div>
-  <div class="header-main">
+</div>
+
+<header class="header">
+  <div class="header-inner">
     <a href="/" class="header-logo">
       <img src={siteConfig.logo} alt="Oberon Mall" width="125" height="99" />
     </a>
     <nav class="header-nav" id="nav">
-      {navLinks.map(link => (
-        <a href={link.href} class={pathname === link.href || pathname === link.href + '/' ? 'active' : ''}>{link.label}</a>
-      ))}
+      <ul>
+        {navLinks.map(link => {
+          const isActive = pathname === link.href || pathname === link.href + '/';
+          return (
+            <li>
+              <a href={link.href} class={isActive ? 'active' : ''}>{link.label}</a>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
