@@ -1,163 +1,182 @@
-<div class="greview-widget" id="greviewWidget">
-  <div class="greview-badge" onclick="toggleReviews()">
-    <div class="greview-score">
-      <span class="greview-stars" id="greviewStars">★★★★★</span>
-      <span class="greview-rating" id="greviewRating">4.3</span>
-    </div>
-    <div class="greview-label">
-      <span class="greview-text">Google Reviews</span>
-      <span class="greview-arrow" id="greviewArrow">▾</span>
-    </div>
+<div class="greview-ticker" id="greviewWidget">
+  <div class="greview-ticker-tab" onclick="toggleReviews()">
+    <div class="greview-ticker-icon">★</div>
+    <div class="greview-ticker-score">4.3</div>
+    <div class="greview-ticker-chevron" id="tickerChevron">‹</div>
   </div>
-  <div class="greview-dropdown" id="greviewDropdown">
-    <div class="greview-dropdown-inner">
-      <div class="greview-header">
-        <strong>★ 4.3</strong> — 1,200+ reviews
+  <div class="greview-ticker-panel" id="tickerPanel">
+    <div class="greview-panel-inner">
+      <div class="greview-panel-header">
+        <span class="greview-panel-stars">★★★★★</span>
+        <span class="greview-panel-rating">4.3</span>
+        <span class="greview-panel-count">(1,200+)</span>
       </div>
-      <div class="greview-reviews" id="greviewReviews">
-        <div class="greview-review">
-          <div class="greview-review-stars">★★★★★</div>
+      <div class="greview-panel-reviews">
+        <div class="greview-panel-review">
+          <div class="greview-panel-rstars">★★★★★</div>
           <p>"Great shopping mall with a wide variety of stores. The food court is excellent and the PVR cinema is top-notch."</p>
         </div>
-        <div class="greview-review">
-          <div class="greview-review-stars">★★★★☆</div>
+        <div class="greview-panel-review">
+          <div class="greview-panel-rstars">★★★★☆</div>
           <p>"Kerala's first lifestyle mall. Well maintained, good parking, and a great place for family outings."</p>
         </div>
-        <div class="greview-review">
-          <div class="greview-review-stars">★★★★★</div>
+        <div class="greview-panel-review">
+          <div class="greview-panel-rstars">★★★★★</div>
           <p>"Excellent shopping experience. All major brands available. Clean environment and helpful staff."</p>
         </div>
-        <div class="greview-review">
-          <div class="greview-review-stars">★★★★☆</div>
-          <p>"Good mall with decent options for shopping and dining. Located conveniently in Edappally."</p>
-        </div>
       </div>
-      <a href="https://share.google.com/eoJbb12dGb54a7HQm" target="_blank" class="greview-link" onclick="event.stopPropagation();">View all on Google →</a>
+      <a href="https://share.google.com/eoJbb12dGb54a7HQm" target="_blank" class="greview-panel-link">View all on Google →</a>
     </div>
   </div>
 </div>
 
 <style>
-.greview-widget {
-  position: relative;
-  display: inline-block;
-  z-index: 50;
+.greview-ticker {
+  position: absolute;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
 }
-.greview-badge {
-  display: inline-flex;
+.greview-ticker-tab {
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-  background: rgba(0,0,0,0.55);
+  gap: 2px;
+  background: rgba(0,0,0,0.6);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 12px;
-  padding: 10px 18px;
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 10px;
+  padding: 10px 8px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 20px;
+  min-width: 48px;
 }
-.greview-badge:hover {
-  background: rgba(0,0,0,0.7);
-  border-color: rgba(255,255,255,0.3);
-  transform: translateY(-1px);
+.greview-ticker-tab:hover {
+  background: rgba(0,0,0,0.75);
+  border-color: rgba(255,255,255,0.25);
 }
-.greview-score {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.greview-stars {
+.greview-ticker-icon {
   color: #F4B400;
-  font-size: 1.2rem;
-  letter-spacing: 2px;
+  font-size: 1.1rem;
+  line-height: 1;
 }
-.greview-rating {
+.greview-ticker-score {
   color: #fff;
-  font-size: 1.4rem;
+  font-size: 1rem;
   font-weight: 700;
+  line-height: 1.2;
 }
-.greview-label {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: rgba(255,255,255,0.8);
-  font-size: 0.85rem;
-}
-.greview-arrow {
-  font-size: 0.8rem;
+.greview-ticker-chevron {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.9rem;
+  line-height: 1;
   transition: transform 0.3s ease;
 }
-.greview-arrow.open { transform: rotate(180deg); }
-.greview-dropdown {
+.greview-ticker.open .greview-ticker-chevron {
+  transform: rotate(180deg);
+}
+
+/* Panel slides out to the right */
+.greview-ticker-panel {
   position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  width: 360px;
+  right: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 340px;
+  max-width: calc(100vw - 100px);
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
   opacity: 0;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
   border-radius: 12px;
   background: rgba(0,0,0,0.85);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid rgba(255,255,255,0.1);
 }
-.greview-dropdown.open {
-  max-height: 500px;
+.greview-ticker.open .greview-ticker-panel {
+  max-height: 460px;
   opacity: 1;
   overflow-y: auto;
 }
-.greview-dropdown-inner { padding: 20px; }
-.greview-header {
+.greview-panel-inner { padding: 20px; }
+.greview-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: #fff;
-  font-size: 1rem;
-  margin-bottom: 16px;
+  font-size: 0.95rem;
+  margin-bottom: 14px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255,255,255,0.1);
 }
-.greview-reviews { display: flex; flex-direction: column; gap: 14px; }
-.greview-review { line-height: 1.5; }
-.greview-review-stars { color: #F4B400; font-size: 0.95rem; margin-bottom: 4px; letter-spacing: 2px; }
-.greview-review p {
+.greview-panel-stars { color: #F4B400; font-size: 1rem; letter-spacing: 2px; }
+.greview-panel-rating { font-weight: 700; font-size: 1.1rem; }
+.greview-panel-count { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+.greview-panel-reviews { display: flex; flex-direction: column; gap: 12px; }
+.greview-panel-review { line-height: 1.5; }
+.greview-panel-rstars { color: #F4B400; font-size: 0.9rem; margin-bottom: 4px; letter-spacing: 2px; }
+.greview-panel-review p {
   color: rgba(255,255,255,0.85);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   margin: 0;
   line-height: 1.5;
 }
-.greview-link {
+.greview-panel-link {
   display: block;
   text-align: center;
-  margin-top: 16px;
+  margin-top: 14px;
   padding-top: 12px;
   border-top: 1px solid rgba(255,255,255,0.1);
   color: #8AB4F8;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   font-weight: 500;
   transition: color 0.2s;
 }
-.greview-link:hover { color: #fff; }
+.greview-panel-link:hover { color: #fff; }
 
-@media (max-width: 480px) {
-  .greview-dropdown { width: 300px; left: 0; transform: none; }
+@media (max-width: 768px) {
+  .greview-ticker {
+    right: 10px;
+    top: auto;
+    bottom: 20px;
+    transform: none;
+  }
+  .greview-ticker-tab {
+    padding: 8px 6px;
+    min-width: 40px;
+    border-radius: 8px;
+  }
+  .greview-ticker-icon { font-size: 0.95rem; }
+  .greview-ticker-score { font-size: 0.85rem; }
+  .greview-ticker-panel {
+    right: auto;
+    left: 0;
+    bottom: calc(100% + 8px);
+    top: auto;
+    transform: none;
+    width: 300px;
+  }
+  .greview-ticker.open .greview-ticker-panel {
+    left: 10px;
+  }
 }
 </style>
 
 <script>
 function toggleReviews() {
-  const dropdown = document.getElementById('greviewDropdown');
-  const arrow = document.getElementById('greviewArrow');
-  dropdown.classList.toggle('open');
-  arrow.classList.toggle('open');
+  const widget = document.getElementById('greviewWidget');
+  widget.classList.toggle('open');
 }
-// Close on click outside
 document.addEventListener('click', function(e) {
   const widget = document.getElementById('greviewWidget');
   if (widget && !widget.contains(e.target)) {
-    document.getElementById('greviewDropdown').classList.remove('open');
-    document.getElementById('greviewArrow').classList.remove('open');
+    widget.classList.remove('open');
   }
 });
 </script>
