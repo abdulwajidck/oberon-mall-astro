@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { newsArticles } from '../../data/stores.ts';
+
+export async function getStaticPaths() {
+  return newsArticles.map(article => ({
+    params: { slug: article.slug },
+    props: { article },
+  }));
+}
+
+const { article } = Astro.props;
+---
+
+<Layout title={`${article.title} - Oberon Mall`} description={article.excerpt}>
+  <section class="page-hero">
+    <h1>{article.title}</h1>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width:800px;">
+      <div class="news-card-date" style="margin-bottom:16px;">{article.date}</div>
+      <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} style="border-radius:4px;width:100%;margin-bottom:24px;" />
+      <div style="font-size:1.1rem;line-height:1.8;color:#374151;">
+        <p style="margin-bottom:16px;">{article.excerpt}</p>
+        <p style="margin-bottom:16px;">Oberon Mall, Kerala's first lifestyle shopping mall, continues to be the premier destination for shopping, dining, and entertainment in Kochi. With over 60 premium brands, a world-class food court, PVR Cinemas, and exciting events throughout the year, Oberon Mall offers an unparalleled experience for the whole family.</p>
+        <p style="margin-bottom:16px;">Located at Edappally, Kochi, Oberon Mall has been serving the community for over 15 years, constantly evolving to meet the changing needs of its visitors while maintaining its position as the region's most beloved shopping destination.</p>
+      </div>
+      <a href="/news/" class="btn" style="margin-top:24px;">Back To News</a>
+    </div>
+  </section>
+
+  <Newsletter />
+</Layout>

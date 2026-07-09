@@ -1,0 +1,40 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Newsletter from '../components/Newsletter.astro';
+---
+
+<Layout title="Upcoming Events - Oberon Mall" description="Discover exciting events at Oberon Mall. From live concerts to seasonal celebrations, there's always something happening.">
+  <section class="page-hero">
+    <h1>Discover Exciting Events</h1>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px;">
+        <h2 style="text-transform:uppercase;">Latest Past Events</h2>
+      </div>
+      <div class="store-grid">
+        <div class="event-card">
+          <div class="event-date">Past Event</div>
+          <h3>Sooraj Santosh Live Concert</h3>
+          <p style="color:#737373;margin:12px 0;">Experience the magic of live music at Oberon Mall with Sooraj Santosh, one of Kerala's most beloved playback singers.</p>
+          <a href="#" class="read-more">View Details →</a>
+        </div>
+        <div class="event-card">
+          <div class="event-date">Past Event</div>
+          <h3>Christmas Celebrations</h3>
+          <p style="color:#737373;margin:12px 0;">Time for Santa! Join us for festive celebrations, shopping sprees, and gourmet delights throughout the holiday season.</p>
+          <a href="#" class="read-more">View Details →</a>
+        </div>
+        <div class="event-card">
+          <div class="event-date">Past Event</div>
+          <h3>Win A Spree Contest</h3>
+          <p style="color:#737373;margin:12px 0;">Shop and win! Our exciting shopping spree contest gave lucky visitors the chance to win amazing prizes.</p>
+          <a href="#" class="read-more">View Details →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</Layout>

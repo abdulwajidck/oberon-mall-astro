@@ -1,0 +1,77 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { newsArticles } from '../data/stores.ts';
+---
+
+<Layout title="About Us - Oberon Mall" description="Learn about Oberon Mall, Kerala's first lifestyle shopping mall.">
+  <section class="page-hero">
+    <h1>About Oberon Mall</h1>
+  </section>
+
+  <section class="section">
+    <div class="container" style="text-align:center;max-width:800px;margin:0 auto;">
+      <span class="eyebrow">Discover</span>
+      <h2 style="text-transform:uppercase;">Learn About The Family's First Pick</h2>
+      <p style="margin:20px 0;font-size:1.15rem;color:#737373;">Your place for endless discoveries, memorable moments, and immersive fun times.</p>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--cream);">
+    <div class="container">
+      <div class="info-cards">
+        <div class="info-card">
+          <h3>A World Of Shopping</h3>
+          <p>Over 60 premium brands across 4 floors, offering everything from fashion and electronics to beauty and lifestyle.</p>
+        </div>
+        <div class="info-card">
+          <h3>Culinary Delights Await</h3>
+          <p>From global fast-food chains to local favorites, our food court and restaurants serve up flavors for every palate.</p>
+        </div>
+        <div class="info-card">
+          <h3>Entertainment For Everyone</h3>
+          <p>PVR Cinemas, gaming zones, kids' play areas, and seasonal events make Oberon Mall the ultimate entertainment hub.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px;">
+        <h2 style="text-transform:uppercase;">Testimonials</h2>
+      </div>
+      <div style="max-width:700px;margin:0 auto;text-align:center;">
+        <blockquote style="font-size:1.3rem;font-style:italic;color:#737373;line-height:1.8;">
+          "Oberon Mall has been our family's favorite weekend destination for years. The variety of stores, dining options, and the cinema make it a complete experience."
+        </blockquote>
+        <p style="margin-top:16px;font-weight:600;">— Happy Shopper</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--cream);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px;">
+        <h2 style="text-transform:uppercase;">What's New At Oberon Mall?</h2>
+        <a href="/news/" class="btn" style="margin-top:16px;">Explore Now</a>
+      </div>
+      <div class="store-grid">
+        {newsArticles.map(article => (
+          <article class="news-card">
+            <a href={`/news/${article.slug}/`}>
+              <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} />
+            </a>
+            <div class="news-card-body">
+              <div class="news-card-date">{article.date}</div>
+              <h3><a href={`/news/${article.slug}/`}>{article.title}</a></h3>
+              <a href={`/news/${article.slug}/`} class="read-more">Read More →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</Layout>

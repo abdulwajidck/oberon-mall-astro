@@ -1,0 +1,63 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { stores, siteConfig } from '../../data/stores.ts';
+
+export async function getStaticPaths() {
+  return stores.map(store => ({
+    params: { slug: store.slug },
+    props: { store },
+  }));
+}
+
+const { store } = Astro.props;
+const relatedStores = stores.filter(s => s.category === store.category && s.slug !== store.slug).slice(0, 3);
+---
+
+<Layout title={`${store.name} - Oberon Mall`} description={`${store.name} at Oberon Mall. ${store.category} on ${store.floor}.`}>
+  <section class="page-hero" style={`background-image:url(${store.bgImg || store.logo});`}>
+    <h1>{store.name}</h1>
+  </section>
+
+  <section class="section">
+    <div class="container" style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+      <div>
+        {store.logo && !store.logo.startsWith('data:') && (
+          <img src={store.logo} alt={store.name} style="max-width:100%;border-radius:4px;" />
+        )}
+      </div>
+      <div>
+        <span class="eyebrow">{store.category}</span>
+        <h2 style="text-transform:uppercase;margin-bottom:16px;">{store.name}</h2>
+        {store.hours && <p style="font-size:1.1rem;margin-bottom:8px;"><strong>Hours:</strong> Open {store.hours}</p>}
+        {store.floor && <p style="font-size:1.1rem;margin-bottom:8px;"><strong>Location:</strong> {store.floor}</p>}
+        <p style="margin:20px 0;color:#737373;">Visit {store.name} at Oberon Mall, Kerala's premier lifestyle shopping destination. Explore our wide range of {store.category.toLowerCase()} options.</p>
+        <a href="/brand/" class="btn">Back To All Stores</a>
+      </div>
+    </div>
+  </section>
+
+  {relatedStores.length > 0 && (
+    <section class="section" style="background:var(--cream);">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:40px;">
+          <h2 style="text-transform:uppercase;">Related Stores</h2>
+        </div>
+        <div class="store-grid">
+          {relatedStores.map(s => (
+            <a href={`/brand/${s.slug}/`} class="store-card" style={`background-image:url(${s.bgImg || s.logo});`}>
+              {s.logo && !s.logo.startsWith('data:') && <img src={s.logo} alt={s.name} class="store-card-logo" />}
+              <div class="store-card-content">
+                <h6>{s.name}</h6>
+                {s.hours && <span class="store-hours">Open {s.hours}</span>}
+                {s.floor && <span class="store-floor">{s.floor}</span>}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <Newsletter />
+</Layout>

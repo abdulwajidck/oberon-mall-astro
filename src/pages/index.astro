@@ -1,0 +1,177 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Newsletter from '../components/Newsletter.astro';
+import { stores, siteConfig, newsArticles } from '../data/stores.ts';
+
+// Featured stores for different sections
+const featuredStores = stores.slice(0, 3);
+const brandCards = stores.filter(s => ['basics', 'kfc', 'world-of-titan'].includes(s.slug));
+---
+
+<Layout>
+  <!-- Hero with video background -->
+  <section class="hero">
+    <video autoplay muted loop playsinline>
+      <source src={siteConfig.heroVideo} type="video/mp4" />
+    </video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>Discover Oberon Mall</h1>
+      <a href="/brand/" class="btn">See All Stores</a>
+    </div>
+  </section>
+
+  <!-- Browse Our Shops Banner -->
+  <section style="background:var(--primary);padding:30px 0;text-align:center;">
+    <div class="container">
+      <a href="/brand/" style="color:var(--white);font-size:1.2rem;font-weight:600;text-transform:uppercase;letter-spacing:2px;">Browse Our Shops</a>
+    </div>
+  </section>
+
+  <!-- Find It. Love It. Section -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px;">
+        <span class="eyebrow">Explore</span>
+        <h2 style="text-transform:uppercase;">Find It. Love It.</h2>
+        <p style="font-size:1.1rem;color:#737373;margin-top:8px;">Discover luxury, dining, beauty & fun.</p>
+      </div>
+      <div class="featured-cards">
+        {featuredStores.map((store, i) => (
+          <a href={`/brand/${store.slug}/`} class="featured-card" style={`background-image:url(${store.bgImg || store.logo});`}>
+            <div class="featured-card-content">
+              <h3>{i === 0 ? 'Meet Me At @Oberon™' : i === 1 ? 'Now Open: Purplle' : 'Now Open: Cafe Coffee Day'}</h3>
+              <span class="btn-link">{i === 0 ? 'Join The Fun' : 'See The Details'} →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- More To Discover -->
+  <section style="padding:40px 0;background:var(--cream);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:30px;">
+        <h2 style="text-transform:uppercase;">More To Discover</h2>
+      </div>
+      <div class="featured-cards">
+        <div class="featured-card" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/Screenshot-2024-12-17-at-1.00.59-PM-2.jpg);">
+          <div class="featured-card-content"><h3>Win A Spree</h3></div>
+        </div>
+        <div class="featured-card" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg);">
+          <div class="featured-card-content"><h3>Gourmet Delight</h3></div>
+        </div>
+        <div class="featured-card" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/2024-07-30.jpg);">
+          <div class="featured-card-content"><h3>Time For Santa</h3></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About section promo -->
+  <section class="two-col section">
+    <div class="container" style="display:contents;">
+      <div>
+        <span class="eyebrow">About</span>
+        <h2 style="text-transform:uppercase;">Make Yourself Gorgeous And Shine</h2>
+        <p style="margin:20px 0;color:#737373;font-size:1.05rem;">Oberon Mall is Kerala's first lifestyle shopping mall, a destination where shopping meets entertainment. With over 60 premium brands, diverse dining options, and a world-class cinema, every visit is a new discovery.</p>
+        <a href="/about/" class="btn">About Oberon Mall</a>
+      </div>
+      <div>
+        <img src="https://oberonmall.com/wp-content/uploads/2024/12/Screenshot-2024-12-17-at-1.00.59-PM-2.jpg" alt="Oberon Mall" style="border-radius:4px;width:100%;" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Popcorn Time / Movies -->
+  <section class="promo-banner" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/img-1.jpeg);">
+    <div class="promo-banner-content">
+      <h2>It's Popcorn Time</h2>
+      <h1 style="color:var(--white);font-size:2rem;text-transform:uppercase;margin-bottom:16px;">Big Screen Magic Awaits</h1>
+      <a href="/movies/" class="btn">Explore</a>
+    </div>
+  </section>
+
+  <!-- Explore Trends -->
+  <section style="padding:40px 0;text-align:center;background:var(--white);">
+    <div class="container">
+      <button class="btn" onclick="window.location.href='/brand/'">Explore Trends</button>
+    </div>
+  </section>
+
+  <!-- Brands You Love -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px;">
+        <span class="eyebrow">Shopping</span>
+        <h2 style="text-transform:uppercase;">Brands You Love</h2>
+        <p style="font-size:1.1rem;color:#737373;margin-top:8px;">Discover luxury, dining, beauty & fun.</p>
+      </div>
+      <div class="store-grid">
+        {brandCards.map(store => (
+          <a href={`/brand/${store.slug}/`} class="store-card" style={`background-image:url(${store.bgImg || store.logo});`}>
+            {store.logo && <img src={store.logo} alt={store.name} class="store-card-logo" />}
+            <div class="store-card-content">
+              <h6>{store.name}</h6>
+              <span class="store-hours">Open {store.hours}</span>
+              <span class="store-floor">{store.floor}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Deals -->
+  <section style="padding:40px 0;background:var(--cream);">
+    <div class="container">
+      <h3 style="text-transform:uppercase;text-align:center;margin-bottom:30px;color:var(--primary);">Featured Deals</h3>
+      <div class="store-grid">
+        <div class="store-card" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/Screenshot-2024-12-16-at-1.37.07-PM.jpg);">
+          <div class="store-card-content"><h6>Basics Mega Sale</h6></div>
+        </div>
+        <div class="store-card" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/11fe8a27-5cff-4511-aa96-25f1a5dc262a.jpg);">
+          <div class="store-card-content"><h6>Now Open: KFC</h6></div>
+        </div>
+        <div class="store-card" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/ascdacvdsvds.webp);">
+          <div class="store-card-content"><h6>Titan</h6></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What's Happening -->
+  <section class="promo-banner" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/2024-07-30.jpg);">
+    <div class="promo-banner-content">
+      <h2>What's Happening At Oberon Mall?</h2>
+      <a href="/events/" class="btn">Explore Events</a>
+    </div>
+  </section>
+
+  <!-- News & Articles -->
+  <section class="section">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:40px;">
+        <h2 style="text-transform:uppercase;">News & Articles</h2>
+        <p style="color:#737373;margin-top:8px;">Keeping you up-to-date with the latest news and events.</p>
+      </div>
+      <div class="store-grid">
+        {newsArticles.map(article => (
+          <article class="news-card">
+            <a href={`/news/${article.slug}/`}>
+              <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} />
+            </a>
+            <div class="news-card-body">
+              <div class="news-card-date">{article.date}</div>
+              <h3><a href={`/news/${article.slug}/`}>{article.title}</a></h3>
+              <a href={`/news/${article.slug}/`} class="read-more">Read More →</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</Layout>

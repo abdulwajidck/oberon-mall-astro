@@ -1,0 +1,132 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Newsletter from '../../components/Newsletter.astro';
+import { stores, categories } from '../../data/stores.ts';
+---
+
+<Layout title="Brands - Oberon Mall" description="Explore all stores and brands at Oberon Mall. Filter by category, search by name, and discover your favorite shops.">
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <h1>Brands</h1>
+  </section>
+
+  <section class="section" style="padding-top:40px;">
+    <div class="container" style="display:grid;grid-template-columns:280px 1fr;gap:30px;align-items:start;">
+      <!-- Sidebar Filters -->
+      <aside>
+        <div class="filter-sidebar">
+          <h4>Categories</h4>
+          <ul class="category-list" id="categoryList">
+            <li><button class="active" data-category="all">All Stores <span class="count">{stores.length}</span></button></li>
+            {categories.map(cat => (
+              <li><button data-category={cat.name}>{cat.name} <span class="count">{cat.count}</span></button></li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="filter-sidebar">
+          <h4>Product Order</h4>
+          <div class="sort-dropdown">
+            <select id="sortBy">
+              <option value="default">None</option>
+              <option value="newest">By Newest</option>
+              <option value="oldest">By Oldest</option>
+              <option value="az">By Title (A-Z)</option>
+              <option value="za">By Title (Z-A)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="filter-sidebar">
+          <h4>Search</h4>
+          <div class="search-box">
+            <input type="search" id="searchInput" placeholder="Search stores..." />
+          </div>
+        </div>
+      </aside>
+
+      <!-- Store Grid -->
+      <div>
+        <div class="store-grid" id="storeGrid">
+          {stores.map(store => (
+            <a
+              href={`/brand/${store.slug}/`}
+              class="store-card"
+              data-category={store.category}
+              data-name={store.name.toLowerCase()}
+              style={`background-image:url(${store.bgImg || store.logo || 'https://via.placeholder.com/400x500/252525/ffffff?text=' + encodeURIComponent(store.name)});`}
+            >
+              {store.logo && !store.logo.startsWith('data:') && <img src={store.logo} alt={store.name} class="store-card-logo" loading="lazy" />}
+              <div class="store-card-content">
+                <h6>{store.name}</h6>
+                {store.hours && <span class="store-hours">Open {store.hours}</span>}
+                {store.floor && <span class="store-floor">{store.floor}</span>}
+              </div>
+            </a>
+          ))}
+        </div>
+        <div id="noResults" style="display:none;text-align:center;padding:40px;color:#737373;">
+          <p>No stores found matching your criteria.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Newsletter />
+</Layout>
+
+<script>
+  const categoryButtons = document.querySelectorAll('#categoryList button');
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortBy');
+  const storeCards = document.querySelectorAll('#storeGrid .store-card');
+  const noResults = document.getElementById('noResults');
+  let activeCategory = 'all';
+  let searchTerm = '';
+  let sortMode = 'default';
+
+  function filterAndSort() {
+    let visible = 0;
+    const cardsArray = Array.from(storeCards);
+
+    // Sort
+    if (sortMode === 'az') cardsArray.sort((a, b) => a.dataset.name.localeCompare(b.dataset.name));
+    else if (sortMode === 'za') cardsArray.sort((a, b) => b.dataset.name.localeCompare(a.dataset.name));
+
+    const grid = document.getElementById('storeGrid');
+    cardsArray.forEach(card => {
+      grid.appendChild(card);
+      const cat = card.dataset.category;
+      const name = card.dataset.name;
+      const catMatch = activeCategory === 'all' || cat === activeCategory;
+      const searchMatch = !searchTerm || name.includes(searchTerm);
+      if (catMatch && searchMatch) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    noResults.style.display = visible === 0 ? 'block' : 'none';
+  }
+
+  categoryButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      categoryButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      activeCategory = btn.dataset.category;
+      filterAndSort();
+    });
+  });
+
+  searchInput?.addEventListener('input', (e) => {
+    searchTerm = e.target.value.toLowerCase().trim();
+    filterAndSort();
+  });
+
+  sortSelect?.addEventListener('change', (e) => {
+    sortMode = e.target.value;
+    filterAndSort();
+  });
+</script>

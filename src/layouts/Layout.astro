@@ -1,0 +1,28 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+const { title = 'Oberon Mall - Ultimate Hub for Shopping & Entertainment in Kochi', description = 'Discover Kerala\'s first lifestyle shopping mall, offering a perfect mix of premium shopping, dining, and entertainment for everyone.' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <link rel="icon" type="image/png" href="https://oberonmall.com/wp-content/uploads/2024/11/Screenshot_2024-11-27_at_7.21.27_PM-removebg-preview.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>{title}</title>
+</head>
+<body>
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+</body>
+</html>
