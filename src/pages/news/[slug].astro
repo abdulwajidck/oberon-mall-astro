@@ -4,13 +4,37 @@ import Newsletter from '../../components/Newsletter.astro';
 import { newsArticles } from '../../data/stores.ts';
 
 export async function getStaticPaths() {
-  return newsArticles.map(article => ({
+  const newsImages = [
+    'https://oberonmall.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-01-at-12.36.37-PM-e1733037009254.jpeg',
+    'https://oberonmall.com/wp-content/uploads/2024/12/2148385668.jpg',
+    'https://oberonmall.com/wp-content/uploads/2024/12/2300-2.jpg'
+  ];
+
+  const articleBodies = [
+    [
+      "Oberon Mall, Kerala's first lifestyle shopping mall, has undergone a stunning refresh after 15 years of serving the community. The renovation brings modern aesthetics, enhanced lighting, and updated interiors while preserving the mall's iconic character that Kochi residents have come to love.",
+      "The refresh includes new flooring, upgraded signage, improved climate control, and redesigned common areas that create a more welcoming and comfortable environment for shoppers. The mall's commitment to providing a world-class experience remains stronger than ever.",
+      "With over 60 premium brands, a vibrant food court, PVR Cinemas, and exciting events throughout the year, Oberon Mall continues to be the region's premier shopping and entertainment destination. The refresh ensures it remains a beloved landmark for years to come."
+    ],
+    [
+      "Smart shopping isn't just about finding the lowest prices — it's about getting the best value for your money. At Oberon Mall, you'll find over 60 premium brands offering everything from fashion and electronics to beauty and lifestyle products.",
+      "Plan your visit during sale seasons and promotional events to maximize savings. Many stores offer loyalty programs, combo deals, and seasonal discounts. Don't forget to check the mall's website and social media for the latest promotions before your visit.",
+      "Compare prices across stores, take advantage of bundle offers, and always ask about ongoing promotions. With a little planning, you can enjoy a premium shopping experience without breaking the bank at Oberon Mall."
+    ],
+    [
+      "A capsule wardrobe is a curated collection of versatile, timeless pieces that can be mixed and matched to create numerous outfits. Building one doesn't require a huge budget — Oberon Mall's diverse fashion brands make it easy and affordable.",
+      "Start with neutral basics: a white shirt, dark jeans, a blazer, and versatile footwear. Then add a few accent pieces that reflect your personal style. Brands like Trends, BASICS, John Players, and Planet Fashion offer quality options at every price point.",
+      "The key is quality over quantity. Invest in well-made pieces that will last, and choose colors that work together. With Oberon Mall's wide selection of fashion brands, you can build a capsule wardrobe that's stylish, practical, and uniquely yours."
+    ]
+  ];
+
+  return newsArticles.map((article, i) => ({
     params: { slug: article.slug },
-    props: { article },
+    props: { article, image: newsImages[i], body: articleBodies[i] },
   }));
 }
 
-const { article } = Astro.props;
+const { article, image, body } = Astro.props;
 ---
 
 <Layout title={`${article.title} - Oberon Mall`} description={article.excerpt}>
@@ -21,11 +45,12 @@ const { article } = Astro.props;
   <section class="section">
     <div class="container" style="max-width:800px;">
       <div class="news-card-date" style="margin-bottom:16px;">{article.date}</div>
-      <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} style="border-radius:4px;width:100%;margin-bottom:24px;" />
+      <img src={image} alt={article.title} style="border-radius:4px;width:100%;margin-bottom:24px;box-shadow:var(--shadow-md);" loading="lazy" />
       <div style="font-size:1.1rem;line-height:1.8;color:#374151;">
-        <p style="margin-bottom:16px;">{article.excerpt}</p>
-        <p style="margin-bottom:16px;">Oberon Mall, Kerala's first lifestyle shopping mall, continues to be the premier destination for shopping, dining, and entertainment in Kochi. With over 60 premium brands, a world-class food court, PVR Cinemas, and exciting events throughout the year, Oberon Mall offers an unparalleled experience for the whole family.</p>
-        <p style="margin-bottom:16px;">Located at Edappally, Kochi, Oberon Mall has been serving the community for over 15 years, constantly evolving to meet the changing needs of its visitors while maintaining its position as the region's most beloved shopping destination.</p>
+        <p style="margin-bottom:16px;font-weight:500;color:var(--primary);">{article.excerpt}</p>
+        {body.map(paragraph => (
+          <p style="margin-bottom:16px;">{paragraph}</p>
+        ))}
       </div>
       <a href="/news/" class="btn" style="margin-top:24px;">Back To News</a>
     </div>

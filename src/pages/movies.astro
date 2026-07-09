@@ -2,43 +2,55 @@
 import Layout from '../layouts/Layout.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { newsArticles } from '../data/stores.ts';
+
+const newsImages = [
+  'https://oberonmall.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-01-at-12.36.37-PM-e1733037009254.jpeg',
+  'https://oberonmall.com/wp-content/uploads/2024/12/2148385668.jpg',
+  'https://oberonmall.com/wp-content/uploads/2024/12/2300-2.jpg'
+];
 ---
 
-<Layout title="PVR Cinemas - Oberon Mall" description="Your ultimate movie destination. Cinematic delights at Oberon Mall with PVR Cinemas.">
+<Layout title="Movies - Oberon Mall" description="Your ultimate movie destination. Cinematic delights at Oberon Mall with PVR Cinemas.">
+  <!-- 1. Page Hero -->
   <section class="page-hero">
     <h1>Cinematic Delights At Oberon Mall</h1>
   </section>
 
+  <!-- 2. YOUR ULTIMATE MOVIE DESTINATION + Book Tickets -->
   <section class="section">
     <div class="container" style="text-align:center;max-width:800px;margin:0 auto;">
+      <span class="eyebrow">Entertainment</span>
       <h2 style="text-transform:uppercase;">Your Ultimate Movie Destination</h2>
       <p style="margin:20px 0;font-size:1.15rem;color:#737373;">Experience the magic of the big screen at PVR Cinemas, Oberon Mall. With state-of-the-art sound, comfortable seating, and the latest blockbusters, every visit is a cinematic adventure.</p>
-      <a href="https://www.pvrcinemas.com" target="_blank" class="btn">Book Tickets</a>
+      <a href="https://www.pvrcinemas.com" target="_blank" rel="noopener" class="btn">Book Tickets</a>
     </div>
   </section>
 
+  <!-- 3. News & Articles -->
   <section class="section" style="background:var(--cream);">
     <div class="container">
-      <div style="text-align:center;margin-bottom:40px;">
-        <h2 style="text-transform:uppercase;">News & Articles</h2>
-        <p style="color:#737373;">Keeping you up-to-date with the latest news and events.</p>
+      <div class="section-heading">
+        <span class="eyebrow">Latest</span>
+        <h2>News &amp; Articles</h2>
+        <p class="section-sub">Keeping you up-to-date with the latest news and events.</p>
       </div>
-      <div class="store-grid">
-        {newsArticles.map(article => (
+      <div class="news-grid">
+        {newsArticles.map((article, i) => (
           <article class="news-card">
-            <a href={`/news/${article.slug}/`}>
-              <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} />
+            <a href={`/news/${article.slug}/`} class="news-card-link">
+              <img src={newsImages[i]} alt={article.title} loading="lazy" />
+              <div class="news-card-body">
+                <div class="news-card-date">{article.date}</div>
+                <h3>{article.title}</h3>
+                <span class="read-more">Read More →</span>
+              </div>
             </a>
-            <div class="news-card-body">
-              <div class="news-card-date">{article.date}</div>
-              <h3><a href={`/news/${article.slug}/`}>{article.title}</a></h3>
-              <a href={`/news/${article.slug}/`} class="read-more">Read More →</a>
-            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- 4. Newsletter -->
   <Newsletter />
 </Layout>

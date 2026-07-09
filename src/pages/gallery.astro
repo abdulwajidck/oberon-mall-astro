@@ -2,34 +2,30 @@
 import Layout from '../layouts/Layout.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { stores } from '../data/stores.ts';
-const galleryImages = stores.filter(s => s.bgImg).slice(0, 12);
+
+const galleryImages = stores.filter(s => s.bgImg);
 ---
 
 <Layout title="Gallery - Oberon Mall" description="Explore the visual beauty of Oberon Mall through our gallery.">
+  <!-- 1. Page Hero -->
   <section class="page-hero">
     <h1>Gallery</h1>
   </section>
 
+  <!-- 2. Image grid using store background images -->
   <section class="section">
     <div class="container">
-      <div style="text-align:center;margin-bottom:40px;">
-        <h2 style="text-transform:uppercase;">Explore Oberon Mall</h2>
-        <p style="color:#737373;margin-top:8px;">A glimpse into the shopping, dining, and entertainment experiences at Oberon Mall.</p>
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+      <div class="gallery-grid">
         {galleryImages.map(store => (
-          <a href={`/brand/${store.slug}/`} style="display:block;overflow:hidden;border-radius:4px;aspect-ratio:1;">
-            <img src={store.bgImg} alt={store.name} loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:all 300ms ease;" class="gallery-img" />
+          <a href={`/brand/${store.slug}/`} class="gallery-item">
+            <img src={store.bgImg} alt={store.name} loading="lazy" />
+            <div class="gallery-item-overlay">{store.name}</div>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <style>
-    .gallery-img:hover { transform: scale(1.05); }
-    @media (max-width: 768px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
-  </style>
-
+  <!-- 3. Newsletter -->
   <Newsletter />
 </Layout>

@@ -2,39 +2,52 @@
 import Layout from '../layouts/Layout.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { newsArticles } from '../data/stores.ts';
+
+const newsImages = [
+  'https://oberonmall.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-01-at-12.36.37-PM-e1733037009254.jpeg',
+  'https://oberonmall.com/wp-content/uploads/2024/12/2148385668.jpg',
+  'https://oberonmall.com/wp-content/uploads/2024/12/2300-2.jpg'
+];
 ---
 
-<Layout title="News - Oberon Mall" description="Keeping you up-to-date with the latest news and events at Oberon Mall.">
+<Layout title="News & Articles - Oberon Mall" description="Keeping you up-to-date with the latest news and events at Oberon Mall.">
+  <!-- 1. Page Hero -->
   <section class="page-hero">
     <h1>News & Articles</h1>
   </section>
 
   <section class="section">
     <div class="container">
-      <div style="text-align:center;margin-bottom:20px;">
-        <form style="max-width:400px;margin:0 auto;display:flex;gap:8px;" onsubmit="return false;">
-          <input type="search" placeholder="Search for..." style="flex:1;padding:12px 16px;border:1px solid #d1d5db;border-radius:3px;font-size:1rem;" />
-          <button type="submit" class="btn">Search</button>
-        </form>
+      <!-- 2. Search bar -->
+      <form class="news-search" onsubmit="return false;">
+        <input type="search" placeholder="Search for..." aria-label="Search articles" />
+        <button type="submit" class="btn">Search</button>
+      </form>
+
+      <!-- 3. LATEST POSTS heading -->
+      <div class="section-heading">
+        <h2>Latest Posts</h2>
       </div>
-      <h2 style="text-transform:uppercase;text-align:center;margin-bottom:30px;">Latest Posts</h2>
-      <div class="store-grid">
-        {newsArticles.map(article => (
+
+      <!-- 4. Three article cards with exact images -->
+      <div class="news-grid">
+        {newsArticles.map((article, i) => (
           <article class="news-card">
-            <a href={`/news/${article.slug}/`}>
-              <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} />
+            <a href={`/news/${article.slug}/`} class="news-card-link">
+              <img src={newsImages[i]} alt={article.title} loading="lazy" />
+              <div class="news-card-body">
+                <div class="news-card-date">{article.date}</div>
+                <h3>{article.title}</h3>
+                <p style="color:#737373;font-size:0.95rem;margin:8px 0;">{article.excerpt}</p>
+                <span class="read-more">Read More →</span>
+              </div>
             </a>
-            <div class="news-card-body">
-              <div class="news-card-date">{article.date}</div>
-              <h3><a href={`/news/${article.slug}/`}>{article.title}</a></h3>
-              <p style="color:#737373;font-size:0.95rem;margin:8px 0;">{article.excerpt}</p>
-              <a href={`/news/${article.slug}/`} class="read-more">Read More →</a>
-            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- 5. Newsletter -->
   <Newsletter />
 </Layout>

@@ -1,25 +1,53 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { stores } from '../data/stores.ts';
-const diningStores = stores.filter(s => s.category === "Food & Beverage");
+
+// ONLY these 3 dining stores
+const diningStores = [
+  {
+    name: "Food Circle",
+    logo: "https://oberonmall.com/wp-content/uploads/2024/12/Screenshot-2024-12-17-at-124555-PM-photoaidcom-cropped.png",
+    bg: "https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg",
+    hours: "11 AM - 10 PM",
+    floor: "Fourth Floor",
+    slug: "food-circle"
+  },
+  {
+    name: "Chicking",
+    logo: "https://oberonmall.com/wp-content/uploads/2024/12/b08816_00b19dec3d48430fb7987acd22e88c24mv2.png.avif",
+    bg: "https://oberonmall.com/wp-content/uploads/2024/12/20c6653f84dc8a6615ad91a33c5ca353.jpg-scaled.avif",
+    hours: "11 AM - 11 PM",
+    floor: "Fourth Floor",
+    slug: "chicking"
+  },
+  {
+    name: "Momo & Me",
+    logo: "https://oberonmall.com/wp-content/uploads/2024/12/images-removebg-preview-3.png",
+    bg: "https://oberonmall.com/wp-content/uploads/2024/12/C04AF0CE-3424-4189-8581-D6FD7D647B97-e1734417301654.jpeg",
+    hours: "10:30 AM - 11 PM",
+    floor: "Fourth Floor",
+    slug: "momo-me"
+  }
+];
 ---
 
 <Layout title="Dining - Oberon Mall" description="Discover dining options at Oberon Mall. From fast food to fine dining, savor flavors that delight your taste buds.">
+  <!-- 1. Page Hero -->
   <section class="page-hero">
     <h1>Dine Happy, Return Hungry</h1>
   </section>
 
+  <!-- 2. Three dining store cards -->
   <section class="section">
     <div class="container">
       <div class="store-grid">
         {diningStores.map(store => (
-          <a href={`/brand/${store.slug}/`} class="store-card" style={`background-image:url(${store.bgImg || store.logo});`}>
-            {store.logo && !store.logo.startsWith('data:') && <img src={store.logo} alt={store.name} class="store-card-logo" />}
+          <a href={`/brand/${store.slug}/`} class="store-card" style={`background-image:url('${store.bg}');`}>
+            <img src={store.logo} alt={store.name} class="store-card-logo" loading="lazy" />
             <div class="store-card-content">
               <h6>{store.name}</h6>
-              {store.hours && <span class="store-hours">Open {store.hours}</span>}
-              {store.floor && <span class="store-floor">{store.floor}</span>}
+              <span class="store-hours">Open {store.hours}</span>
+              <span class="store-floor">{store.floor}</span>
             </div>
           </a>
         ))}
@@ -27,16 +55,18 @@ const diningStores = stores.filter(s => s.category === "Food & Beverage");
     </div>
   </section>
 
-  <section class="promo-banner" style="background-image:url(https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg);">
-    <div class="promo-banner-content">
+  <!-- 3. SAVOR FLAVORS heading -->
+  <section class="dining-savor">
+    <div class="container">
       <h2>Savor Flavors That Delight Your Taste Buds</h2>
     </div>
   </section>
 
+  <!-- 4. GET IN TOUCH contact form -->
   <section class="section" style="background:var(--cream);">
     <div class="container">
-      <div style="text-align:center;margin-bottom:40px;">
-        <h2 style="text-transform:uppercase;">Get In Touch</h2>
+      <div class="section-heading">
+        <h2>Get In Touch</h2>
       </div>
       <form class="contact-form" style="margin:0 auto;" onsubmit="return false;">
         <input type="text" placeholder="Name *" required />
@@ -48,5 +78,6 @@ const diningStores = stores.filter(s => s.category === "Food & Beverage");
     </div>
   </section>
 
+  <!-- 5. Newsletter -->
   <Newsletter />
 </Layout>

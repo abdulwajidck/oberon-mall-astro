@@ -2,76 +2,173 @@
 import Layout from '../layouts/Layout.astro';
 import Newsletter from '../components/Newsletter.astro';
 import { newsArticles } from '../data/stores.ts';
+
+const oberonLogoSmall = 'https://oberonmall.com/wp-content/uploads/2024/11/Screenshot_2024-11-27_at_11.26.14_PM-removebg-preview-e1732730735192.png';
+const renderImage = 'https://oberonmall.com/wp-content/uploads/2024/12/FINAL-RENDER-2.png';
+const girlModel = 'https://oberonmall.com/wp-content/uploads/2024/12/Girl-model-e1733227249545-300.png';
+const businessModel = 'https://oberonmall.com/wp-content/uploads/2024/12/business-model.png';
+
+const newsImages = [
+  'https://oberonmall.com/wp-content/uploads/2024/12/WhatsApp-Image-2024-12-01-at-12.36.37-PM-e1733037009254.jpeg',
+  'https://oberonmall.com/wp-content/uploads/2024/12/2148385668.jpg',
+  'https://oberonmall.com/wp-content/uploads/2024/12/2300-2.jpg'
+];
+
+const testimonials = [
+  { quote: "Oberon Mall offers separate sections for ladies and gents, ample parking, wheelchair-accessible entry, and reliable climate control. Located in a calm, central area with little traffic, it provides an excellent selection for shoppers and a comfortable experience.", author: "Sanjid bin Salim" },
+  { quote: "Oberon Mall offers a delightful shopping experience with a diverse range of stores, a vibrant atmosphere, and well-maintained spaces. The food court provides plenty of culinary options, and its convenient location with ample parking makes it a perfect spot for shopping and leisure.", author: "CHITHRANJALI E" },
+  { quote: "Oberon Mall in Kochi offers a great shopping experience with a mix of local and international brands, a well-maintained food court, and a multiplex cinema. The modern, clean ambiance and helpful staff make it a convenient one-stop destination for shopping and entertainment.", author: "Vijith Uzhamalakkal" }
+];
+
+const infoCards = [
+  { title: "A World of Shopping", text: "Over 60 premium brands across 4 floors, offering everything from fashion and electronics to beauty and lifestyle." },
+  { title: "Culinary Delights Await", text: "From global fast-food chains to local favorites, our food court and restaurants serve up flavors for every palate." },
+  { title: "Entertainment for Everyone", text: "PVR Cinemas, gaming zones, kids' play areas, and seasonal events make Oberon Mall the ultimate entertainment hub." }
+];
 ---
 
 <Layout title="About Us - Oberon Mall" description="Learn about Oberon Mall, Kerala's first lifestyle shopping mall.">
+  <!-- 1. Page Hero -->
   <section class="page-hero">
     <h1>About Oberon Mall</h1>
   </section>
 
+  <!-- 2. LEARN ABOUT THE FAMILY'S FIRST PICK -->
   <section class="section">
-    <div class="container" style="text-align:center;max-width:800px;margin:0 auto;">
-      <span class="eyebrow">Discover</span>
-      <h2 style="text-transform:uppercase;">Learn About The Family's First Pick</h2>
-      <p style="margin:20px 0;font-size:1.15rem;color:#737373;">Your place for endless discoveries, memorable moments, and immersive fun times.</p>
+    <div class="container">
+      <div class="about-learn">
+        <div class="about-learn-text">
+          <span class="eyebrow">Discover</span>
+          <h2 style="text-transform:uppercase;">Learn About The Family's First Pick</h2>
+          <p>Oberon Mall is Kerala's first lifestyle shopping mall, a destination where shopping meets entertainment. With over 60 premium brands, diverse dining options, and a world-class cinema, every visit is a new discovery for the whole family.</p>
+          <p>Located in the heart of Kochi at Edappally, Oberon Mall has been the region's most beloved shopping and entertainment destination for over 15 years. From fashion to food, electronics to entertainment, it all comes together under one roof.</p>
+          <img src={oberonLogoSmall} alt="Oberon Mall logo" class="small-logo" width="50" height="49" />
+        </div>
+        <div class="about-learn-images">
+          <img src={renderImage} alt="Oberon Mall Interior Render" class="render-img" width="520" height="450" loading="lazy" />
+          <img src={girlModel} alt="Oberon Mall Model" class="model-img" width="260" height="325" loading="lazy" />
+        </div>
+      </div>
     </div>
   </section>
 
-  <section class="section" style="background:var(--cream);">
+  <!-- 3. YOUR PLACE FOR ENDLESS DISCOVERIES... -->
+  <section class="about-bold-heading" style="background:var(--cream);">
+    <div class="container">
+      <h2>
+        <span class="phrase">Your Place For Endless Discoveries</span>
+        <span class="phrase">Memorable Moments</span>
+        <span class="phrase">Immersive Fun Times</span>
+      </h2>
+    </div>
+  </section>
+
+  <!-- 4. Three info cards with Oberon logo icon -->
+  <section class="section">
     <div class="container">
       <div class="info-cards">
-        <div class="info-card">
-          <h3>A World Of Shopping</h3>
-          <p>Over 60 premium brands across 4 floors, offering everything from fashion and electronics to beauty and lifestyle.</p>
-        </div>
-        <div class="info-card">
-          <h3>Culinary Delights Await</h3>
-          <p>From global fast-food chains to local favorites, our food court and restaurants serve up flavors for every palate.</p>
-        </div>
-        <div class="info-card">
-          <h3>Entertainment For Everyone</h3>
-          <p>PVR Cinemas, gaming zones, kids' play areas, and seasonal events make Oberon Mall the ultimate entertainment hub.</p>
-        </div>
+        {infoCards.map(card => (
+          <div class="info-card">
+            <img src={oberonLogoSmall} alt="Oberon Mall" class="info-card-icon" width="50" height="49" />
+            <h3>{card.title}</h3>
+            <p>{card.text}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
 
-  <section class="section">
-    <div class="container">
-      <div style="text-align:center;margin-bottom:40px;">
-        <h2 style="text-transform:uppercase;">Testimonials</h2>
-      </div>
-      <div style="max-width:700px;margin:0 auto;text-align:center;">
-        <blockquote style="font-size:1.3rem;font-style:italic;color:#737373;line-height:1.8;">
-          "Oberon Mall has been our family's favorite weekend destination for years. The variety of stores, dining options, and the cinema make it a complete experience."
-        </blockquote>
-        <p style="margin-top:16px;font-weight:600;">— Happy Shopper</p>
-      </div>
-    </div>
-  </section>
-
+  <!-- 5. TESTIMONIALS slider -->
   <section class="section" style="background:var(--cream);">
     <div class="container">
-      <div style="text-align:center;margin-bottom:40px;">
-        <h2 style="text-transform:uppercase;">What's New At Oberon Mall?</h2>
-        <a href="/news/" class="btn" style="margin-top:16px;">Explore Now</a>
+      <div class="section-heading">
+        <h2>Testimonials</h2>
       </div>
-      <div class="store-grid">
-        {newsArticles.map(article => (
+      <div class="testimonials">
+        <div class="testimonial-slider" id="testimonialSlider">
+          <div class="testimonial-track" id="testimonialTrack">
+            {testimonials.map((t, i) => (
+              <div class="testimonial-slide">
+                <blockquote>"{t.quote}"</blockquote>
+                <cite>— {t.author}</cite>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="testimonial-nav">
+          <button id="testimonialPrev" aria-label="Previous testimonial">‹</button>
+          <button id="testimonialNext" aria-label="Next testimonial">›</button>
+        </div>
+        <div class="testimonial-dots" id="testimonialDots">
+          {testimonials.map((_, i) => (
+            <button class={`testimonial-dot${i === 0 ? ' active' : ''}`} data-index={i} aria-label={`Go to testimonial ${i + 1}`}></button>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WHAT'S NEW AT OBERON MALL? -->
+  <section class="section">
+    <div class="container">
+      <div class="whats-new-grid">
+        <div class="whats-new-image">
+          <img src={businessModel} alt="What's New at Oberon Mall" width="550" height="367" loading="lazy" />
+        </div>
+        <div class="whats-new-text">
+          <span class="eyebrow eyebrow--gold">Updates</span>
+          <h2>What's New At Oberon Mall?</h2>
+          <p>Stay up to date with the latest happenings, new store openings, events, and exciting promotions at Oberon Mall. There's always something new to discover!</p>
+          <a href="/news/" class="btn">Explore Now</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. NEWS & ARTICLES -->
+  <section class="section" style="background:var(--cream);">
+    <div class="container">
+      <div class="section-heading">
+        <span class="eyebrow">Latest</span>
+        <h2>News &amp; Articles</h2>
+        <p class="section-sub">Keeping you up-to-date with the latest news and events.</p>
+      </div>
+      <div class="news-grid">
+        {newsArticles.map((article, i) => (
           <article class="news-card">
-            <a href={`/news/${article.slug}/`}>
-              <img src="https://oberonmall.com/wp-content/uploads/2024/12/2021-12-12.jpg" alt={article.title} />
+            <a href={`/news/${article.slug}/`} class="news-card-link">
+              <img src={newsImages[i]} alt={article.title} loading="lazy" />
+              <div class="news-card-body">
+                <div class="news-card-date">{article.date}</div>
+                <h3>{article.title}</h3>
+                <span class="read-more">Read More →</span>
+              </div>
             </a>
-            <div class="news-card-body">
-              <div class="news-card-date">{article.date}</div>
-              <h3><a href={`/news/${article.slug}/`}>{article.title}</a></h3>
-              <a href={`/news/${article.slug}/`} class="read-more">Read More →</a>
-            </div>
           </article>
         ))}
       </div>
     </div>
   </section>
 
+  <!-- 8. Newsletter -->
   <Newsletter />
 </Layout>
+
+<script>
+  const track = document.getElementById('testimonialTrack');
+  const dots = document.querySelectorAll('#testimonialDots .testimonial-dot');
+  const prevBtn = document.getElementById('testimonialPrev');
+  const nextBtn = document.getElementById('testimonialNext');
+  let current = 0;
+  const total = 3;
+
+  function goTo(index) {
+    current = (index + total) % total;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+  if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
+  dots.forEach(dot => dot.addEventListener('click', (e) => goTo(parseInt(e.target.dataset.index))));
+</script>
