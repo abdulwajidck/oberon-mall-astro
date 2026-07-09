@@ -1,17 +1,16 @@
 ---
-import { newsArticles } from '../data/stores.ts';
 ---
 
-<section class="newsletter">
+<section class="newsletter" style="background:#13B58C url('https://oberonmall.com/wp-content/uploads/2024/11/Doodle-01a.png') repeat; background-size: cover;">
   <div class="container">
-    <div class="newsletter-content">
-      <h2>Sign Up For Our Newsletter</h2>
-      <p>Be the first to know about exclusive deals, events, and the latest happenings at Oberon Mall. Sign up now and never miss an update!</p>
-      <form class="newsletter-form" onsubmit="return false;">
-        <input type="email" placeholder="Enter Your E-mail..." required />
-        <button type="submit">Notify Me</button>
+    <div class="newsletter-content" style="text-align:center;max-width:600px;margin:0 auto;padding:40px 0;">
+      <h2 style="color:#fff;text-transform:uppercase;margin-bottom:12px;letter-spacing:1px;">Sign Up For Our Newsletter</h2>
+      <p style="color:rgba(255,255,255,0.9);margin-bottom:24px;">Be the first to know about exclusive deals, events, and the latest happenings at Oberon Mall. Sign up now and never miss an update!</p>
+      <form class="newsletter-form" style="display:flex;gap:12px;max-width:500px;margin:0 auto;" onsubmit="return false;">
+        <input type="email" placeholder="Enter Your E-mail..." required style="flex:1;padding:14px 20px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.15);color:#fff;font-family:inherit;font-size:16px;border-radius:3px;" />
+        <button type="submit" style="padding:14px 28px;background:#fff;color:#13B58C;border:none;border-radius:3px;font-family:inherit;font-weight:600;text-transform:uppercase;cursor:pointer;">Notify Me</button>
       </form>
-      <p style="margin-top:12px;font-size:0.85rem;opacity:0.7;"><a href="/privacy/" style="color:rgba(255,255,255,0.7);">Privacy Policy.</a></p>
+      <p style="margin-top:12px;font-size:0.85rem;opacity:0.8;"><a href="/privacy/" style="color:rgba(255,255,255,0.9);">Privacy Policy.</a></p>
     </div>
   </div>
 </section>

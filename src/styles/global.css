@@ -59,6 +59,8 @@ img { max-width: 100%; height: auto; display: block; }
 
 .section { padding: 70px 0; }
 .section--cream { background: var(--cream); }
+.section--gradient-cream { background: linear-gradient(0deg, #F8F7F2 8.7%, #fff 8.7%); }
+.section--gradient-gold { background: linear-gradient(0deg, #b0a257 0%, #fff 5.6%); }
 .section--center { text-align: center; }
 
 /* ===== Focus Rings ===== */
@@ -295,8 +297,8 @@ input:focus-visible {
 
 /* ===== Happiness in Return Marquee ===== */
 .happiness-marquee {
-  background: var(--primary);
-  padding: 24px 0;
+  background: #b0a257;
+  padding: 16px 0;
   overflow: hidden;
 }
 .happiness-marquee-track {
@@ -448,9 +450,18 @@ input:focus-visible {
 /* ===== Popcorn / Movies Section ===== */
 .popcorn-section {
   padding: 80px 0;
-  background: var(--dark-text);
+  background: url('https://oberonmall.com/wp-content/uploads/2025/09/desktop-wtht-txt.jpg') center/cover no-repeat;
   color: var(--white);
+  position: relative;
 }
+.popcorn-section::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(37,37,37,0.6);
+  z-index: 0;
+}
+.popcorn-section .container { position: relative; z-index: 1; }
 .popcorn-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
