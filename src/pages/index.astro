@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Newsletter from '../components/Newsletter.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
 import { newsArticles } from '../data/stores.ts';
 
 // Brand logos for marquee (27 logos, duplicated for seamless loop)
@@ -37,6 +38,7 @@ const newsImages = [
     <div class="hero-content">
       <h1>Discover Oberon Mall</h1>
       <a href="/brand/" class="btn btn-hero">See All Stores</a>
+      <GoogleReviews />
     </div>
   </section>
 
