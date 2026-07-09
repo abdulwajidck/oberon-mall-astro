@@ -463,10 +463,10 @@ input:focus-visible {
 }
 .popcorn-section .container { position: relative; z-index: 1; }
 .popcorn-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  display: flex;
+  justify-content: center;
   align-items: center;
+  text-align: center;
 }
 .popcorn-text h2 {
   color: var(--white);
@@ -483,10 +483,7 @@ input:focus-visible {
   color: rgba(255,255,255,0.85);
   margin-bottom: 24px;
 }
-.popcorn-image img {
-  width: 100%;
-  border-radius: 4px;
-}
+/* (popcorn-image removed) */
 
 /* ===== Brands You Love ===== */
 .brands-grid {
